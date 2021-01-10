@@ -11,8 +11,15 @@ class TicTacToe {
   executeMove(moveIndex){
     if(this.board[moveIndex] == ""){
       this.board[moveIndex] = this.currentPlayer;
-      this.currentPlayer = (this.currentPlayer == Player_One ? Player_Two  : Player_One);
       this.updateBoard();
+
+      if(!this.gameWinner()){
+        this.currentPlayer = (this.currentPlayer == Player_One ? Player_Two  : Player_One);
+      }
+      else{
+        alert("Player" + this.currentPlayer + "Wins");
+        this.start();
+      }
     }
   }
 
@@ -24,6 +31,21 @@ class TicTacToe {
         element.innerText = THIS.board[index];
 
       }
+    });
+  }
+
+  gameWinner (){
+    const winningCombo = [
+      [0,1,2], [3,4,5], [6,7,8], // hori
+      [0,3,6], [1,4,7], [2,5,8], // vert
+      [0,4,8], [2,4,6] // dia
+    ];
+    return winningCombo.find(combo => {
+      if(this.board[combo[0]] != "" && this.board[combo[1]] != "" && this.board[combo[2]] != "" && this.board[combo[0]] == this.board[combo[1]] && this.board[combo[1]] == this.board[combo[2]])
+        return true;
+      else
+        return false;
+      
     });
   }
 
