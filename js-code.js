@@ -12,7 +12,19 @@ class TicTacToe {
     if(this.board[moveIndex] == ""){
       this.board[moveIndex] = this.currentPlayer;
       this.currentPlayer = (this.currentPlayer == Player_One ? Player_Two  : Player_One);
+      this.updateBoard();
     }
+  }
+
+  updateBoard(){
+    let gameBoard = document.getElementById('gameBoard');
+    let squareElements = gameBoard.childNodes;
+    squareElements.forEach((element, index) => {
+      if(element.innerText != this.board[index]){
+        element.innerText = THIS.board[index];
+
+      }
+    });
   }
 
   drawBoard(){
